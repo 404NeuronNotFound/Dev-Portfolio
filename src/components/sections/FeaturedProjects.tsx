@@ -7,7 +7,7 @@ export function FeaturedProjects() {
   const navigate = useNavStore((s) => s.navigate);
 
   return (
-    <div style={{ padding: '0 32px 40px' }}>
+    <div className="page-x" style={{ paddingBottom: 40 }}>
       {/* ── featured teaser cards ─────────────────────────────────────── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '28px 0 20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -37,7 +37,7 @@ export function FeaturedProjects() {
           <tr style={{ borderBottom: '1px solid var(--sp-dark3)' }}>
             <th style={{ width: 40, padding: '8px 16px', color: 'var(--sp-gray)', fontSize: 11, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>#</th>
             <th style={{ padding: '8px 0', color: 'var(--sp-gray)', fontSize: 11, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'left' }}>Title</th>
-            <th style={{ padding: '8px 16px', color: 'var(--sp-gray)', fontSize: 11, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>Status</th>
+            <th className="hide-on-mobile" style={{ padding: '8px 16px', color: 'var(--sp-gray)', fontSize: 11, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>Status</th>
             <th style={{ padding: '8px 16px', color: 'var(--sp-gray)', fontSize: 11, textAlign: 'right' }}>
               <Clock size={13} style={{ verticalAlign: 'middle' }} />
             </th>

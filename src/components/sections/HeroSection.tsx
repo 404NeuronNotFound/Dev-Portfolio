@@ -1,5 +1,7 @@
+import { Play, Pause, BadgeCheck } from 'lucide-react';
 import { usePlayerStore, useNavStore } from '../../store';
 import { Button, Avatar }              from '../../components/ui';
+import { useIsMobile }                 from '../../hooks';
 import { SITE }                        from '../../constants';
 
 export function HeroSection() {
@@ -7,64 +9,54 @@ export function HeroSection() {
   const currentTrack = usePlayerStore((s) => s.currentTrack);
   const play         = usePlayerStore((s) => s.play);
   const navigate     = useNavStore((s) => s.navigate);
+  const isMobile     = useIsMobile();
+
+  const avatarSize = isMobile ? 120 : 180;
 
   return (
     <div
       style={{
-        padding:    '48px 32px 36px',
+        padding:    isMobile ? '32px 16px 28px' : '48px 32px 36px',
         background: 'linear-gradient(180deg, rgba(29,185,84,.28) 0%, var(--sp-dark) 100%)',
       }}
     >
       {/* ── Spotify-style artist layout: photo left, info right ── */}
       <div
         style={{
-          display:    'flex',
-          alignItems: 'flex-end',
-          gap:        32,
+          display:      'flex',
+          alignItems:   isMobile ? 'center' : 'flex-end',
+          flexDirection: isMobile ? 'column' : 'row',
+          textAlign:    isMobile ? 'center' : 'left',
+          gap:          isMobile ? 16 : 32,
           marginBottom: 28,
-          flexWrap:   'wrap',
+          flexWrap:     'wrap',
         }}
       >
         {/* ── Artist photo ── */}
         <div
           style={{
-            boxShadow: '0 16px 48px rgba(0,0,0,.6)',
-            border:    '2px solid rgba(255,255,255,.08)',
+            boxShadow:    '0 16px 48px rgba(0,0,0,.6)',
+            border:       '2px solid rgba(255,255,255,.08)',
             borderRadius: '50%',
-            flexShrink: 0,
+            flexShrink:   0,
           }}
         >
-          <Avatar size={180} alt={`${SITE.fullName} photo`} />
+          <Avatar size={avatarSize} alt={`${SITE.fullName} photo`} />
         </div>
 
         {/* ── Text info ── */}
-        <div style={{ flex: 1, minWidth: 240 }}>
+        <div style={{ flex: 1, minWidth: isMobile ? '100%' : 240 }}>
           {/* verified badge — just like Spotify */}
           <div
             style={{
-              display:      'flex',
-              alignItems:   'center',
-              gap:          6,
-              marginBottom: 10,
+              display:        'flex',
+              alignItems:     'center',
+              justifyContent: isMobile ? 'center' : 'flex-start',
+              gap:            6,
+              marginBottom:   10,
             }}
           >
-            <span
-              style={{
-                width:          18,
-                height:         18,
-                background:     'var(--sp-green)',
-                borderRadius:   '50%',
-                display:        'inline-flex',
-                alignItems:     'center',
-                justifyContent: 'center',
-                fontSize:       10,
-                color:          '#000',
-                fontWeight:     900,
-                flexShrink:     0,
-              }}
-            >
-              ✓
-            </span>
+            <BadgeCheck size={18} fill="var(--sp-green)" color="#000" />
             <span
               style={{
                 fontSize:      11,
@@ -80,9 +72,9 @@ export function HeroSection() {
 
           <h1
             style={{
-              fontSize:      64,
+              fontSize:      'clamp(36px, 9vw, 64px)',
               fontWeight:    900,
-              letterSpacing: '-3px',
+              letterSpacing: '-2px',
               color:         'var(--sp-white)',
               lineHeight:    1,
               marginBottom:  12,
@@ -91,14 +83,22 @@ export function HeroSection() {
             {SITE.fullName}
           </h1>
 
-          <p style={{ fontSize: 16, color: 'var(--sp-gray)', marginBottom: 0 }}>
+          <p style={{ fontSize: 'clamp(13px, 2.5vw, 16px)', color: 'var(--sp-gray)', marginBottom: 0 }}>
             {SITE.tagline} · {SITE.location}
           </p>
         </div>
       </div>
 
       {/* ── Stats row ── */}
-      <div style={{ display: 'flex', gap: 32, marginBottom: 28 }}>
+      <div
+        style={{
+          display:        'flex',
+          gap:             isMobile ? 24 : 32,
+          marginBottom:    28,
+          justifyContent:  isMobile ? 'center' : 'flex-start',
+          textAlign:       isMobile ? 'center' : 'left',
+        }}
+      >
         {SITE.stats.map(({ value, label }) => (
           <div key={label}>
             <span style={{ fontSize: 22, fontWeight: 800, color: 'var(--sp-white)', display: 'block' }}>
@@ -110,7 +110,15 @@ export function HeroSection() {
       </div>
 
       {/* ── CTA buttons ── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display:        'flex',
+          alignItems:      'center',
+          justifyContent:  isMobile ? 'center' : 'flex-start',
+          gap:             16,
+          flexWrap:        'wrap',
+        }}
+      >
         <button
           onClick={() => play(currentTrack)}
           aria-label={isPlaying ? 'Pause' : 'Play'}
@@ -121,7 +129,6 @@ export function HeroSection() {
             border:         'none',
             borderRadius:   '50%',
             cursor:         'pointer',
-            fontSize:       20,
             display:        'flex',
             alignItems:     'center',
             justifyContent: 'center',
@@ -132,7 +139,9 @@ export function HeroSection() {
           onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.07)'; e.currentTarget.style.background = 'var(--sp-green-h)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.background = 'var(--sp-green)'; }}
         >
-          {isPlaying ? '⏸' : '▶'}
+          {isPlaying
+            ? <Pause size={22} fill="#000" color="#000" />
+            : <Play size={22} fill="#000" color="#000" style={{ marginLeft: 2 }} />}
         </button>
 
         <Button variant="outline" rounded onClick={() => navigate('contact')}>
