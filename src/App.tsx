@@ -35,7 +35,6 @@ export default function App() {
         background:  'var(--sp-black)',
         color:       'var(--sp-white)',
         display:     'flex',
-        height:      '100vh',
         overflow:    'hidden',
         fontSize:    14,
         lineHeight:  1.5,

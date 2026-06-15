@@ -1,6 +1,6 @@
 /* ── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-serif; }
+html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-serif; overflow: hidden; }
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
 ::-webkit-scrollbar              { width: 6px; }
@@ -44,8 +44,16 @@ html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-s
   .hide-on-tablet { display: none !important; }
 }
 
-/* iOS Safari: use dynamic viewport height so the playbar/bottom nav
-   aren't hidden behind the browser chrome */
+/* ── App shell sizing ───────────────────────────────────────── */
+/* Base: 100vh works everywhere. On browsers that support 100dvh
+   (dynamic viewport height), it correctly accounts for the
+   address bar / toolbar that mobile browsers show & hide on
+   scroll — without it, content (incl. the bottom nav) can end
+   up clipped below the visible area on iOS Safari & Android Chrome. */
+.app-shell {
+  height: 100vh;
+}
+
 @supports (height: 100dvh) {
   .app-shell { height: 100dvh; }
 }
