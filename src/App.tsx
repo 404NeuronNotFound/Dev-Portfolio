@@ -1,5 +1,6 @@
 import { useNavStore }                                 from './store';
-import { Sidebar, Topbar, Playbar }                    from './components/layout';
+import { useIsMobile }                                 from './hooks';
+import { Sidebar, Topbar, Playbar, BottomNav }         from './components/layout';
 import {
   HomePage,
   AboutPage,
@@ -24,10 +25,12 @@ const PAGE_MAP: Record<SectionId, JSX.Element> = {
 
 // ─── App ───────────────────────────────────────────────────────────────────
 export default function App() {
-  const active = useNavStore((s) => s.active);
+  const active   = useNavStore((s) => s.active);
+  const isMobile = useIsMobile();
 
   return (
     <div
+      className="app-shell"
       style={{
         background:  'var(--sp-black)',
         color:       'var(--sp-white)',
@@ -38,21 +41,24 @@ export default function App() {
         lineHeight:  1.5,
       }}
     >
-      {/* ── left sidebar ── */}
-      <Sidebar />
+      {/* ── left sidebar — desktop / tablet only ── */}
+      {!isMobile && <Sidebar />}
 
-      {/* ── right column: topbar · scrollable content · playbar ── */}
+      {/* ── right column: topbar · scrollable content · playbar · bottom nav ── */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         <Topbar />
 
         <main
           role="main"
-          style={{ flex: 1, overflowY: 'auto', background: 'var(--sp-dark)' }}
+          style={{ flex: 1, overflowY: 'auto', background: 'var(--sp-dark)', WebkitOverflowScrolling: 'touch' }}
         >
           {PAGE_MAP[active] ?? <HomePage />}
         </main>
 
         <Playbar />
+
+        {/* ── bottom tab bar — mobile only ── */}
+        {isMobile && <BottomNav />}
       </div>
     </div>
   );
