@@ -1,4 +1,4 @@
-import { Lock } from 'lucide-react';
+import { Lock, Play } from 'lucide-react';
 import { usePlayerStore, useNavStore } from '../../store';
 import { useNowCoding }                from '../../hooks';
 import { projects }                    from '../../data';
@@ -15,7 +15,9 @@ export function Sidebar() {
     <aside style={{ width: 'var(--sidebar-w)', background: 'var(--sp-black)', display: 'flex', flexDirection: 'column', padding: '18px 8px 0', flexShrink: 0, overflowY: 'auto' }}>
       {/* logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 10px', marginBottom: 22 }}>
-        <div style={{ width: 30, height: 30, background: 'var(--sp-green)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 900, color: '#000', flexShrink: 0 }}>▶</div>
+        <div style={{ width: 30, height: 30, background: 'var(--sp-green)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <Play size={14} fill="#000" color="#000" style={{ marginLeft: 1 }} />
+        </div>
         <span style={{ fontSize: 15, fontWeight: 900, letterSpacing: '-.3px', color: 'var(--sp-white)' }}>Keybeen</span>
       </div>
 
