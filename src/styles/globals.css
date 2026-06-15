@@ -23,9 +23,31 @@ html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-s
 
   --sidebar-w:   236px;
   --playbar-h:   90px;
+  --playbar-h-mobile: 64px;
+  --bottomnav-h: 56px;
   --topbar-h:    52px;
   --radius-sm:   4px;
   --radius-md:   8px;
+}
+
+/* ── Responsive helpers ─────────────────────────────────────── */
+.hide-on-mobile { display: initial; }
+.hide-on-desktop { display: none; }
+
+@media (max-width: 768px) {
+  .hide-on-mobile  { display: none !important; }
+  .hide-on-desktop { display: initial; }
+  .hide-on-tablet  { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .hide-on-tablet { display: none !important; }
+}
+
+/* iOS Safari: use dynamic viewport height so the playbar/bottom nav
+   aren't hidden behind the browser chrome */
+@supports (height: 100dvh) {
+  .app-shell { height: 100dvh; }
 }
 
 /* ── Gradient helpers (used by project cards) ──────────────── */
@@ -44,6 +66,14 @@ a { color: inherit; text-decoration: none; }
 @keyframes eqBounce {
   0%, 100% { transform: scaleY(0.35); }
   50%      { transform: scaleY(1); }
+}
+
+/* ── Page padding (responsive) ─────────────────────────────── */
+.page { padding: 40px 32px; }
+.page-x { padding-left: 32px; padding-right: 32px; }
+@media (max-width: 768px) {
+  .page   { padding: 24px 16px; }
+  .page-x { padding-left: 16px; padding-right: 16px; }
 }
 
 /* ── Soft pulse (Projects "in development" banner) ─────────── */
