@@ -1,6 +1,7 @@
 import { Clock } from 'lucide-react';
 import { useNavStore }       from '../../store';
 import { TeaserCard, TeaserRow, Tag } from '../../components/ui';
+import { GithubActivitySection } from './GithubActivitySection';
 import { projects }          from '../../data';
 
 export function FeaturedProjects() {
@@ -8,6 +9,9 @@ export function FeaturedProjects() {
 
   return (
     <div className="page-x" style={{ paddingBottom: 40 }}>
+      {/* ── GitHub contribution activity ──────────────────────────────── */}
+      <GithubActivitySection />
+
       {/* ── featured teaser cards ─────────────────────────────────────── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '28px 0 20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
