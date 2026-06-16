@@ -48,7 +48,7 @@ export function ShareCardInner({ forExport = false }: CardProps) {
             <path d="M5 3l14 9-14 9V3z" fill="#000" />
           </svg>
         </div>
-        <span style={{ fontSize: 12 * scale, fontWeight: 800, letterSpacing: 1, color: '#a7a7a7' }}>devfolio</span>
+        <span style={{ fontSize: 12 * scale, fontWeight: 800, letterSpacing: 1, color: '#a7a7a7' }}>Keybeen</span>
       </div>
 
       {/* avatar + name row */}
@@ -153,7 +153,7 @@ export function ShareCardModal({ onClose }: ShareCardModalProps) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <div>
             <h2 style={{ fontSize: 18, fontWeight: 800, color: '#fff', marginBottom: 2 }}>Share profile</h2>
-            <p style={{ fontSize: 13, color: '#a7a7a7' }}>Your developer card — share it or download as PNG</p>
+            <p style={{ fontSize: 13, color: '#a7a7a7' }}>My developer card, share it or download as PNG</p>
           </div>
           <button
             onClick={onClose}
