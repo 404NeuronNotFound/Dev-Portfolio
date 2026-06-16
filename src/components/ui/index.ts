@@ -9,3 +9,4 @@ export { TeaserCard }    from './TeaserCard';
 export { TeaserRow }     from './TeaserRow';
 export { ContactLinkCard, type ContactLink } from './ContactLinkCard';
 export { Avatar } from './Avatar';  
+export { ContributionHeatmap } from './ContributionHeatmap';

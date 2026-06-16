@@ -10,6 +10,7 @@ export const SITE: SiteConfig = {
   location: 'Cagayan De Oro, PH',
   email:    'keybeen.webdeveloper@gmail.com',
   github:   'https://github.com/404NeuronNotFound',
+  githubUsername: '404NeuronNotFound',
   linkedin: 'https://linkedin.com/in/kxvxn',
   twitter:  'https://twitter.com/kxvxn',
   website:  'https://kxvxn.dev',
