@@ -75,4 +75,5 @@ export interface SiteConfig {
   stats: StatItem[];
   instagram: string;
   tiktok: string;
+  githubUsername: string;
 }

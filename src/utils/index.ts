@@ -27,3 +27,51 @@ export function clamp(value: number, min = 0, max = 100): number {
 export function cn(...classes: (string | undefined | false)[]): string {
   return classes.filter(Boolean).join(' ');
 }
+
+interface ContributionLike {
+  date:  string;
+  count: number;
+}
+
+interface ContributionStats {
+  currentStreak: number;
+  longestStreak: number;
+  bestDay: { date: string; count: number } | null;
+}
+
+/** Derive streak + "best day" stats from a chronological list of contribution days */
+export function computeContributionStats(days: ContributionLike[]): ContributionStats {
+  if (days.length === 0) return { currentStreak: 0, longestStreak: 0, bestDay: null };
+
+  let longest = 0;
+  let running = 0;
+  let best: ContributionLike = days[0];
+
+  for (const day of days) {
+    if (day.count > 0) {
+      running += 1;
+      if (running > longest) longest = running;
+    } else {
+      running = 0;
+    }
+    if (day.count > best.count) best = day;
+  }
+
+  // current streak = consecutive active days counting back from the most recent
+  let current = 0;
+  for (let i = days.length - 1; i >= 0; i--) {
+    if (days[i].count > 0) current += 1;
+    else break;
+  }
+
+  return {
+    currentStreak: current,
+    longestStreak: longest,
+    bestDay: best.count > 0 ? { date: best.date, count: best.count } : null,
+  };
+}
+
+/** Format an ISO date ("YYYY-MM-DD") as "Mon D" */
+export function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
