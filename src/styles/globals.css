@@ -8,7 +8,7 @@ html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-s
 ::-webkit-scrollbar-thumb        { background: #333; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover  { background: #535353; }
 
-/* ── Spotify colour tokens ─────────────────────────────────── */
+/* ── Spotify colour tokens — DARK (default) ────────────────── */
 :root {
   --sp-black:    #000000;
   --sp-dark:     #121212;
@@ -21,14 +21,38 @@ html, body, #root { height: 100%; font-family: 'Inter', 'Helvetica Neue', sans-s
   --sp-gray:     #a7a7a7;
   --sp-gray2:    #535353;
 
-  --sidebar-w:   236px;
-  --playbar-h:   90px;
+  --sidebar-w:        236px;
+  --playbar-h:        90px;
   --playbar-h-mobile: 64px;
-  --bottomnav-h: 56px;
-  --topbar-h:    52px;
-  --radius-sm:   4px;
-  --radius-md:   8px;
+  --bottomnav-h:      56px;
+  --topbar-h:         52px;
+  --radius-sm:        4px;
+  --radius-md:        8px;
 }
+
+/* ── LIGHT mode overrides ──────────────────────────────────── */
+[data-theme="light"] {
+  --sp-black:  #ffffff;
+  --sp-dark:   #f6f6f6;
+  --sp-dark2:  #ebebeb;
+  --sp-dark3:  #d8d8d8;
+  --sp-dark4:  #c0c0c0;
+  --sp-white:  #111111;
+  --sp-gray:   #555555;
+  --sp-gray2:  #888888;
+}
+
+/* Light mode scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-thumb        { background: #c0c0c0; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover  { background: #aaaaaa; }
+
+/* Gradient cards — slightly lighter in light mode */
+[data-theme="light"] .grad-emerald { background: linear-gradient(135deg, #bbf7d0, #d1fae5); }
+[data-theme="light"] .grad-blue    { background: linear-gradient(135deg, #bfdbfe, #dbeafe); }
+[data-theme="light"] .grad-yellow  { background: linear-gradient(135deg, #fed7aa, #ffedd5); }
+[data-theme="light"] .grad-purple  { background: linear-gradient(135deg, #e9d5ff, #f3e8ff); }
+[data-theme="light"] .grad-teal    { background: linear-gradient(135deg, #99f6e4, #ccfbf1); }
+[data-theme="light"] .grad-zinc    { background: linear-gradient(135deg, #e2e8f0, #f1f5f9); }
 
 /* ── Responsive helpers ─────────────────────────────────────── */
 .hide-on-mobile { display: initial; }
@@ -82,6 +106,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
   .page   { padding: 24px 16px; }
   .page-x { padding-left: 16px; padding-right: 16px; }
+}
+
+/* ── Timeline scroll-spy ────────────────────────────────────── */
+.timeline-line-fill {
+  transition: height .4s cubic-bezier(.4,0,.2,1);
 }
 
 /* ── Soft pulse (Projects "in development" banner) ─────────── */
