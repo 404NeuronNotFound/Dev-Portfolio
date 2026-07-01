@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, ChevronDown, Sun, Moon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown} from 'lucide-react';
 import { useNavStore, useThemeStore }   from '../../store';
 import { SITE }          from '../../constants';
 import { Avatar }        from '../../components/ui';
@@ -32,7 +32,7 @@ export function Topbar() {
   const canBack    = useNavStore((s) => s.canBack)();
   const canForward = useNavStore((s) => s.canForward)();
   const theme      = useThemeStore((s) => s.theme);
-  const toggleTheme = useThemeStore((s) => s.toggleTheme);
+  // const toggleTheme = useThemeStore((s) => s.toggleTheme);
   const isLight    = theme === 'light';
 
   return (
